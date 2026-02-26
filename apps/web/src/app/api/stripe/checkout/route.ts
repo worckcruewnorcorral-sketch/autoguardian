@@ -14,9 +14,7 @@ function getStripe() {
     throw new Error("STRIPE_SECRET_KEY is not set in environment");
   }
   // Trim to strip any trailing newlines or whitespace from env var
-  return new Stripe(key.trim(), {
-    apiVersion: "2025-12-18.basil" as any,
-  });
+  return new Stripe(key.trim());
 }
 
 function getPlans() {
