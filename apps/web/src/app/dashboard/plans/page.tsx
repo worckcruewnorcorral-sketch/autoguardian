@@ -81,7 +81,7 @@ export default function PlansPage() {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: planKey, annual }),
+        body: JSON.stringify({ plan: planKey, interval: annual ? "annual" : "monthly" }),
       });
 
       const data = await res.json();
