@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/lib/supabase/server";
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+function getAnthropic() {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    throw new Error("ANTHROPIC_API_KEY is not set");
+  }
+  return new Anthropic({ apiKey: apiKey.trim() });
+}
 
 const QUOTE_SYSTEM_PROMPT = `You are AutoGuardian's repair quote analyzer. You evaluate automotive repair quotes to determine if prices are fair, identify red flags, and help car owners negotiate better deals.
 
@@ -133,7 +137,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const message = await anthropic.messages.create({
+    const message = await getAnthropic().messages.create({
       model: "claude-sonnet-4-20250514",
       max_tokens: 3000,
       system: QUOTE_SYSTEM_PROMPT,
