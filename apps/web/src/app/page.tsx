@@ -36,6 +36,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+      {/* Header */}
+      <header className="absolute top-0 left-0 right-0 z-50 px-6 py-4">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <span className="text-xl font-bold text-white">AutoGuardian AI</span>
+          <a href="/login" className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors">Login</a>
+        </div>
+      </header>
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         {/* Background gradient */}
@@ -310,7 +317,7 @@ export default function Home() {
                 disabled={status === 'loading'}
                 className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 disabled:bg-emerald-500/50 text-white font-semibold rounded-xl transition-all"
               >
-                {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
+                           {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
               </button>
             </div>
           </form>
